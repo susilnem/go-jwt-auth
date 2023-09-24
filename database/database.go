@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"go-jwt/model"
+	model "go-jwt/models"
 	"os"
 
 	"gorm.io/driver/postgres"
