@@ -2,9 +2,12 @@ package controller
 
 import (
 	"go-jwt/database"
+	"go-jwt/internal/format_errors"
+	"go-jwt/internal/pagination"
 	model "go-jwt/models"
 	"go-jwt/utils"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -86,4 +89,25 @@ func Login(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"token": token})
+}
+
+func GetUsers(c *gin.Context) {
+	var users []model.User
+
+	//set default page and perPage
+	pageStr := c.DefaultQuery("page", "1")
+	page, _ := strconv.Atoi(pageStr)
+
+	perPageStr := c.DefaultQuery("perPage", "5")
+	perPage, _ := strconv.Atoi(perPageStr)
+
+	result, err := pagination.Paginate(database.Database, page, perPage, nil, &users)
+	if err != nil {
+		format_errors.InternalServerError(c)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": result,
+	})
 }

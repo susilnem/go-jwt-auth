@@ -1,4 +1,4 @@
-package errors
+package format_errors
 
 import (
 	"errors"

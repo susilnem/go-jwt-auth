@@ -22,6 +22,8 @@ func main() {
 
 	// set up routes
 	router.Route(app)
+	router.GetRoute(app)
+
 	port := os.Getenv("SERVER_PORT")
 
 	// run server on port 8080
