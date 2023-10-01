@@ -111,3 +111,18 @@ func GetUsers(c *gin.Context) {
 		"result": result,
 	})
 }
+
+func EditUser(c *gin.Context) {
+	// get user id from url
+	id := c.Param("id")
+
+	var user model.User
+	result := database.Database.First(&user, id)
+
+	if err := result.Error; err != nil {
+		format_errors.RecordNotFound(c, nil)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}

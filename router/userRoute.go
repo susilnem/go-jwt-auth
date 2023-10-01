@@ -13,7 +13,7 @@ func GetRoute(app *gin.Engine) {
 	userRouter.Use(middleware.JWTAuthMiddleware())
 	{
 		userRouter.GET("/", controller.GetUsers)
-		// userRouter.GET("/:id/edit", controller.EditUser)
+		userRouter.GET("/:id/", controller.EditUser)
 		// userRouter.PUT("/:id/update", controller.UpdateUser)
 		// userRouter.DELETE("/:id/delete", controller.DeleteUser)
 	}
