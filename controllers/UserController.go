@@ -120,7 +120,7 @@ func EditUser(c *gin.Context) {
 	result := database.Database.First(&user, id)
 
 	if err := result.Error; err != nil {
-		format_errors.RecordNotFound(c, nil)
+		format_errors.RecordNotFound(c, err)
 		return
 	}
 
@@ -135,7 +135,7 @@ func UpdateUser(c *gin.Context) {
 	result := database.Database.First(&user, id)
 
 	if err := result.Error; err != nil {
-		format_errors.RecordNotFound(c, nil)
+		format_errors.RecordNotFound(c, err)
 		return
 	}
 
@@ -149,4 +149,23 @@ func UpdateUser(c *gin.Context) {
 	database.Database.Model(&user).Updates(input)
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
+}
+
+func DeleteUser(c *gin.Context) {
+	// get user id from url
+	id := c.Param("id")
+
+	var user model.User
+	result := database.Database.First(&user, id)
+
+	if err := result.Error; err != nil {
+		format_errors.RecordNotFound(c, err)
+		return
+	}
+
+	database.Database.Delete(&user)
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "The user has been deleted successfully",
+	})
 }
