@@ -126,3 +126,27 @@ func EditUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
+
+func UpdateUser(c *gin.Context) {
+	// get user id from url
+	id := c.Param("id")
+
+	var user model.User
+	result := database.Database.First(&user, id)
+
+	if err := result.Error; err != nil {
+		format_errors.RecordNotFound(c, nil)
+		return
+	}
+
+	var input model.User
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	database.Database.Model(&user).Updates(input)
+
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}

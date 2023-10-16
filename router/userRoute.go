@@ -14,7 +14,7 @@ func GetRoute(app *gin.Engine) {
 	{
 		userRouter.GET("/", controller.GetUsers)
 		userRouter.GET("/:id/", controller.EditUser)
-		// userRouter.PUT("/:id/update", controller.UpdateUser)
+		userRouter.PUT("/:id/update", controller.UpdateUser)
 		// userRouter.DELETE("/:id/delete", controller.DeleteUser)
 	}
 
