@@ -92,6 +92,11 @@ const docTemplate = `{
         },
         "/users": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get all users",
                 "consumes": [
                     "application/json"
@@ -129,6 +134,11 @@ const docTemplate = `{
         },
         "/users/{id}": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get user by id",
                 "consumes": [
                     "application/json"
@@ -161,6 +171,11 @@ const docTemplate = `{
         },
         "/users/{id}/delete": {
             "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Delete user by id",
                 "consumes": [
                     "application/json"
@@ -193,6 +208,11 @@ const docTemplate = `{
         },
         "/users/{id}/update": {
             "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Update user by id",
                 "consumes": [
                     "application/json"
@@ -251,8 +271,8 @@ const docTemplate = `{
         }
     },
     "securityDefinitions": {
-        "BearerAuth": {
-            "description": "Add prefix of Bearer before  token Ex: \"Bearer token\"",
+        "Bearer": {
+            "description": "Type \"Bearer\" followed by a space and JWT token.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"

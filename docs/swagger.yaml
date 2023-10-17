@@ -86,6 +86,8 @@ paths:
           description: ok
           schema:
             type: string
+      security:
+      - Bearer: []
       summary: Get Users
       tags:
       - Users
@@ -107,6 +109,8 @@ paths:
           description: ok
           schema:
             type: string
+      security:
+      - Bearer: []
       summary: Get User
       tags:
       - Users
@@ -128,6 +132,8 @@ paths:
           description: ok
           schema:
             type: string
+      security:
+      - Bearer: []
       summary: Delete User
       tags:
       - Users
@@ -155,12 +161,14 @@ paths:
           description: ok
           schema:
             type: string
+      security:
+      - Bearer: []
       summary: Update User
       tags:
       - Users
 securityDefinitions:
-  BearerAuth:
-    description: 'Add prefix of Bearer before  token Ex: "Bearer token"'
+  Bearer:
+    description: Type "Bearer" followed by a space and JWT token.
     in: header
     name: Authorization
     type: apiKey

@@ -116,6 +116,7 @@ func Login(c *gin.Context) {
 // @Param perPage query int false "Per Page"
 // @Success 200 {object} string "ok"
 // @Router /users [get]
+// @Security Bearer
 func GetUsers(c *gin.Context) {
 	var users []model.User
 
@@ -145,6 +146,7 @@ func GetUsers(c *gin.Context) {
 // @Param id path int true "User ID"
 // @Success 200 {object} string "ok"
 // @Router /users/{id} [get]
+// @Security Bearer
 func EditUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")
@@ -170,6 +172,7 @@ func EditUser(c *gin.Context) {
 // @Param input body AuthenticationInput true "Update"
 // @Success 200 {object} string "ok"
 // @Router /users/{id}/update [put]
+// @Security Bearer
 func UpdateUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")
@@ -203,6 +206,7 @@ func UpdateUser(c *gin.Context) {
 // @Param id path int true "User ID"
 // @Success 200 {object} string "ok"
 // @Router /users/{id}/delete [delete]
+// @Security Bearer
 func DeleteUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")

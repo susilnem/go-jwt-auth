@@ -27,10 +27,10 @@ import (
 // @license.url				https://opensource.org/licenses/MIT
 //
 // @BasePath					/api
-// @SecurityDefinitions.apikey	BearerAuth
-// @Name						Authorization
-// @In							header
-// @Description				Add prefix of Bearer before  token Ex: "Bearer token"
+// @securityDefinitions.apikey Bearer
+// @in header
+// @name Authorization
+// @description Type "Bearer" followed by a space and JWT token.
 // @Query.collection.format	multi
 func main() {
 	// load env variables
