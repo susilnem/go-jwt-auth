@@ -1,3 +1,4 @@
+basePath: /api
 definitions:
   controller.AuthenticationInput:
     properties:
@@ -10,7 +11,15 @@ definitions:
     - username
     type: object
 info:
-  contact: {}
+  contact:
+    email: susiltiwari750@gmail.com
+    name: For API Support
+  description: This is a sample jwt authentication api
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Jwt Authentication API
+  version: "1"
 paths:
   /auth/login:
     post:
@@ -149,4 +158,10 @@ paths:
       summary: Update User
       tags:
       - Users
+securityDefinitions:
+  BearerAuth:
+    description: 'Add prefix of Bearer before  token Ex: "Bearer token"'
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

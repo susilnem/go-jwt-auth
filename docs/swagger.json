@@ -1,8 +1,19 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample jwt authentication api",
+        "title": "Jwt Authentication API",
+        "contact": {
+            "name": "For API Support",
+            "email": "susiltiwari750@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1"
     },
+    "basePath": "/api",
     "paths": {
         "/auth/login": {
             "post": {
@@ -230,6 +241,14 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Add prefix of Bearer before  token Ex: \"Bearer token\"",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

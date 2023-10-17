@@ -9,11 +9,29 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	_ "go-jwt/docs"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerfiles "github.com/swaggo/files"
-	docs "go-jwt/docs"
 )
 
+
+// @title Jwt Authentication API
+// @description This is a sample jwt authentication api
+// @BasePath /api
+// @version 1
+//
+// @contact.name				For API Support
+// @contact.email				susiltiwari750@gmail.com
+//
+// @license.name				MIT
+// @license.url				https://opensource.org/licenses/MIT
+//
+// @BasePath					/api
+// @SecurityDefinitions.apikey	BearerAuth
+// @Name						Authorization
+// @In							header
+// @Description				Add prefix of Bearer before  token Ex: "Bearer token"
+// @Query.collection.format	multi
 func main() {
 	// load env variables
 	loadEnv()
@@ -23,10 +41,15 @@ func main() {
 
 	app := gin.Default()
 
+	app.Use(gin.Logger())
+
 	// set up routes
-	docs.SwaggerInfo.BasePath = "/api"
 	router.Route(app)
 	router.GetRoute(app)
+
+	app.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
+	})
 	
 	port := os.Getenv("SERVER_PORT")
 	
