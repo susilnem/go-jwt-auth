@@ -17,7 +17,15 @@ type AuthenticationInput struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
-
+// @BasePath /api/auth
+// @Summary Register
+// @Description Register new user
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param input body AuthenticationInput true "Register"
+// @Success 200 {object} string "ok"
+// @Router /auth/register [post]
 func Register(c *gin.Context) {
 	var input AuthenticationInput
 
@@ -53,7 +61,15 @@ func Register(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": newUser})
 }
-
+// @BasePath /api/auth
+// @Summary Login
+// @Description Login user
+// @Tags Authentication
+// @Accept json
+// @Produce json
+// @Param input body AuthenticationInput true "Login"
+// @Success 200 {object} string "ok"
+// @Router /auth/login [post]
 func Login(c *gin.Context) {
 
 	var input AuthenticationInput
@@ -90,7 +106,16 @@ func Login(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
-
+// @BasePath /api/users
+// @Summary Get Users
+// @Description Get all users
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param page query int false "Page"
+// @Param perPage query int false "Per Page"
+// @Success 200 {object} string "ok"
+// @Router /users [get]
 func GetUsers(c *gin.Context) {
 	var users []model.User
 
@@ -111,7 +136,15 @@ func GetUsers(c *gin.Context) {
 		"result": result,
 	})
 }
-
+// @BasePath /api/users
+// @Summary Get User
+// @Description Get user by id
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} string "ok"
+// @Router /users/{id} [get]
 func EditUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")
@@ -127,6 +160,16 @@ func EditUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
+// @BasePath /api/users
+// @Summary Update User
+// @Description Update user by id
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param input body AuthenticationInput true "Update"
+// @Success 200 {object} string "ok"
+// @Router /users/{id}/update [put]
 func UpdateUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")
@@ -151,6 +194,15 @@ func UpdateUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
+// @BasePath /api/users
+// @Summary Delete User
+// @Description Delete user by id
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} string "ok"
+// @Router /users/{id}/delete [delete]
 func DeleteUser(c *gin.Context) {
 	// get user id from url
 	id := c.Param("id")
