@@ -28,5 +28,5 @@ func Connect() {
 		fmt.Println("Successfully connected to the database")
 	}
 	// Auto migrate
-	Database.AutoMigrate(&model.User{})
+	Database.AutoMigrate(&model.User{}, &model.Role{}, &model.Permission{})
 }
